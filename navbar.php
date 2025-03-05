@@ -11,8 +11,8 @@
         <li><a href="index.php" class="nav-link px-2 ">Home</a></li>
         <li><a href="Shoes.php" class="nav-link px-2 ">Shoes</a></li>
         <li><a href="formlogin.php" class="nav-link  px-2">checkout</a></li>
+        <li><a href="dashbord.php" class="nav-link  px-2">dashboard</a></li>
       </ul>
-
       <div class=" container col-md-3 text-end">
         <a href="formlogin.php" type="button" class="btn btn-outline-primary me-2">Login</a>
         <button type="button" class="btn btn-primary">Sign-up</button>

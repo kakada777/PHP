@@ -3,14 +3,14 @@ session_start();
 
 // Hardcoded user credentials for demonstration
 $valid_username = "admin";
-$valid_password = "123"; // In a real application, use password hashing
+$valid_password = "123"; 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
     if ($username === $valid_username && $password === $valid_password) {
         $_SESSION["username"] = $username;
-        header("Location: cart.php"); // Redirect to dashboard
+        header("Location: cart.php"); 
         exit();
     } else {
         $error = "Invalid username or password";
