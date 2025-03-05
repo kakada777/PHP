@@ -1,9 +1,19 @@
+<?php
+include 'database/db.php';
+
+$sql = "SELECT * FROM products";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
 </head>
 <style>
@@ -76,6 +86,9 @@
 
 </style>
 <body>
+<?php
+include 'navbar.php';
+?>
     <div class="dashboard-container">
         <aside class="sidebar">
             <h2>Admin Panel</h2>
@@ -86,26 +99,35 @@
                 <li><a href="#">Analytics</a></li>
             </ul>
         </aside>
-        <main class="main-content">
-            <header>
-                <h1>Dashboard Overview</h1>
-            </header>
-            <section class="cards">
-                <div class="card">Total Users: 1500</div>
-                <div class="card">New Orders: 230</div>
-                <div class="card">Revenue: $5,000</div>
-                <div class="card">Feedback: 120</div>
-                <div class="card">Active Sessions: 320</div>
-                <div class="card">Pending Requests: 85</div>
-                <div class="card">New Signups: 45</div>
-                <div class="card">Support Tickets: 60</div>
-            </section>
-            <section class="charts">
-                <h2>Performance Metrics</h2>
-                <div class="chart">Chart Placeholder 1</div>
-                <div class="chart">Chart Placeholder 2</div>
-            </section>
-        </main>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Picture</th>
+                <th ><a href="create.php" class="btn btn-primary" >Add New Product</a></th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                <?php while($row = $result->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['name']; ?></td>
+                        <td><?php echo $row['price']; ?>$</td>
+                        <td><img src="<?php echo $row['img']; ?>" width="100" /></td>
+                        <td>
+                            <a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a> |
+                            <a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+                        </td>
+                       
+                    </tr>
+                <?php } ?>
+            </tbody>
+            </table>
+            
     </div>
 </body>
 </html>
