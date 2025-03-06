@@ -10,7 +10,7 @@
         <li><a href="contact.php" class="nav-link px-2 ">Contact</a></li>
         <li><a href="index.php" class="nav-link px-2 ">Home</a></li>
         <li><a href="Shoes.php" class="nav-link px-2 ">Shoes</a></li>
-        <li><a href="formlogin.php" class="nav-link  px-2">checkout</a></li>
+        <li><a href="cart.php" class="nav-link  px-2">checkout</a></li>
         <li><a href="dashbord.php" class="nav-link  px-2">dashboard</a></li>
       </ul>
       <div class=" container col-md-3 text-end">

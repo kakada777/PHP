@@ -81,7 +81,8 @@ $paypalClientId = "AQF4-LO7BqizaeGZelaVXdE4jw1Zw2StMNFegLMEONMF4bEAw7nz0ygL1zRyx
                                     <tbody>
                                         <?php foreach ($cartItems as $item): ?>
                                             <tr>
-                                                <td><?= htmlspecialchars($item['title']) ?></td>
+                                            <td><img src="<?php echo $row['img']; ?>" width="100" /></td>
+                                                <td><?= $item['name'] ?></td>
                                                 <td><?= $item['quantity'] ?></td>
                                                 <td>$<?= number_format($item['price'] * $item['quantity'], 2) ?></td>
                                             </tr>
