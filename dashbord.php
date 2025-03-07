@@ -93,8 +93,8 @@ include 'navbar.php';
         <aside class="sidebar">
             <h2>Admin Panel</h2>
             <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Users</a></li>
+                <li><a href="dashbord.php">Dashboard</a></li>
+                <li><a href="viewaside.php">Slide</a></li>
                 <li><a href="#">Reports</a></li>
                 <li><a href="#">Analytics</a></li>
             </ul>

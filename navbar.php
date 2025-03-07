@@ -12,6 +12,7 @@
         <li><a href="Shoes.php" class="nav-link px-2 ">Shoes</a></li>
         <li><a href="cart.php" class="nav-link  px-2">checkout</a></li>
         <li><a href="dashbord.php" class="nav-link  px-2">dashboard</a></li>
+        <li><a href="aside.php" class="nav-link  px-2">Slide</a></li>
       </ul>
       <div class=" container col-md-3 text-end">
         <a href="formlogin.php" type="button" class="btn btn-outline-primary me-2">Login</a>

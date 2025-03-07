@@ -100,9 +100,9 @@ $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 <?php foreach ($cartItems as $item) : ?>
                     <tr>
                         
-                        <td><img src="<?php echo $row['img']; ?>" width="100" /></td>
+                        <td><img src="<?= htmlspecialchars($item['img']) ?>  " width="100" /></td>
                         <td>
-                        <?= htmlspecialchars($item['name']) ?> - $<?= number_format($item['price'], 2) ?> x <?= $item['quantity'] ?>
+                        <?= htmlspecialchars($item['name']) ?>  
                         </td>
                         <td>$<?= number_format($item['price'], 2); ?></td>
                         <td>

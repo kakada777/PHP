@@ -1,5 +1,6 @@
 <?php include"head.php"?>
 <?php include"navbar.php"?>
+<?php include"scroll.php"?>
 <div class='container'>
       <h1 class='text-center'>GET HELP</h1>
       <div class="form-floating mb-3 w-75 mx-auto mt-4">
