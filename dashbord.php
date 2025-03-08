@@ -100,7 +100,7 @@ include 'navbar.php';
             </ul>
         </aside>
         
-        <table class="table">
+        <table class="table border border-1">
             <thead>
                 <tr>
                 <th scope="col">ID</th>

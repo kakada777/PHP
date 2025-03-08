@@ -71,11 +71,13 @@ $num = $result->num_rows;
             <li><a href="#">Analytics</a></li>
         </ul>
     </aside>
+    
     <div class='body-area'>
         <div class='container-fluid mt-5'>
             <div class='card'>
                 <div class='card-header'>
                     <h4 class='text-center'>View Aside</h4>
+                    <a href="addaside.php" class="btn btn-primary float-right">ADD Slide </a>
                 </div>
                 <div class='card-body'>
                     <table class='table table-responsive table-striped table-bordered'>
