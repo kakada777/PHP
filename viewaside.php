@@ -4,7 +4,7 @@ include 'navbar.php';
 // Include database connection
 require_once 'database/db.php'; // Ensure this file initializes $conn properly
 
-// Fetch the products using MySQLi
+
 $sql = "SELECT * FROM aside";
 $result = $conn->query($sql);
 
@@ -65,13 +65,12 @@ $num = $result->num_rows;
     <aside class="sidebar">
         <h2>Admin Panel</h2>
         <ul>
-            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="dashbord.php">Dashboard</a></li>
             <li><a href="viewaside.php">Slide</a></li>
             <li><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
         </ul>
     </aside>
-    
     <div class='body-area'>
         <div class='container-fluid mt-5'>
             <div class='card'>

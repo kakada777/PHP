@@ -1,35 +1,37 @@
 <?php
 // Include database connection
-require_once 'database/db.php'; // Ensure this file initializes $conn properly
+require_once 'database/db.php'; // Ensure this file initializes $pdo properly
 
-// Establish MySQLi connection
-$conn = new mysqli("127.0.0.1", "root", "root", "ecom_db");
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+try {
+    // Establish PDO connection
+    $pdo = new PDO("mysql:host=127.0.0.1;dbname=ecom_db", "root", "root", [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    ]);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 
 // Get selected aside from the URL
 $aside = isset($_GET['aside']) ? $_GET['aside'] : '';
 
 // Modify query to filter by aside if selected
-$condition = !empty($aside) ? "WHERE aside = ?" : "";
+$condition = !empty($aside) ? "WHERE aside = :aside" : "";
 $sql = "SELECT * FROM aside $condition";
 
 // Prepare the statement
-$stmt = $conn->prepare($sql);
+$stmt = $pdo->prepare($sql);
 
 // Bind parameters if needed
 if (!empty($aside)) {
-    $stmt->bind_param("s", $aside); // "s" for string
+    $stmt->bindParam(":aside", $aside, PDO::PARAM_STR);
 }
 
 // Execute the query
 $stmt->execute();
 
-// Get the result
-$result = $stmt->get_result();
+// Fetch results
+$results = $stmt->fetchAll();
 ?>
 
 <?php include 'navbar.php'; ?>
@@ -38,19 +40,17 @@ $result = $stmt->get_result();
   <div class="carousel-indicators">
     <?php
     $i = 0;
-    while ($row = $result->fetch_assoc()) {
+    foreach ($results as $row) {
         echo '<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="' . $i . '" ' . ($i == 0 ? 'class="active" aria-current="true"' : '') . ' aria-label="Slide ' . ($i + 1) . '"></button>';
         $i++;
     }
-    // Reset result pointer
-    $result->data_seek(0);
     ?>
   </div>
 
   <div class="carousel-inner">
     <?php
     $first = true;
-    while ($row = $result->fetch_assoc()) {
+    foreach ($results as $row) {
     ?>
         <div class="carousel-item <?php echo $first ? 'active' : ''; ?>" data-bs-interval="10000">
             <img src="../images/<?php echo htmlspecialchars($row['image']); ?>" class="d-block w-100">
@@ -74,9 +74,3 @@ $result = $stmt->get_result();
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-
-<?php
-// Close the connection
-$stmt->close();
-$conn->close();
-?>

@@ -4,15 +4,12 @@ define("USER", "root");
 define("PWD", "root");
 define("DB", "ecom_db");
 
-// Establish MySQLi connection
-$conn = new mysqli(HOST, USER, PWD, DB);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 try {
+    // Establish PDO connection
+    $dsn = "mysql:host=" . HOST . ";dbname=" . DB;
+    $conn = new PDO($dsn, USER, PWD);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Enable exception handling for errors
+
     // Validate 'id' parameter
     if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
         echo "<script>alert('Invalid aside ID'); window.location = 'index.php?p=viewaside';</script>";
@@ -23,12 +20,10 @@ try {
     $id = (int)$_GET['id'];
 
     // Fetch the aside image filename before deletion
-    $stmt = $conn->prepare("SELECT image FROM aside WHERE id = ?");
-    $stmt->bind_param("i", $id);
+    $stmt = $conn->prepare("SELECT image FROM aside WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
-    $stmt->bind_result($image);
-    $stmt->fetch();
-    $stmt->close();
+    $image = $stmt->fetchColumn();
 
     if ($image) {
         $imagePath = "../images/" . $image;
@@ -38,21 +33,18 @@ try {
     }
 
     // Delete the aside record
-    $stmt = $conn->prepare("DELETE FROM aside WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    
+    $stmt = $conn->prepare("DELETE FROM aside WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
     if ($stmt->execute()) {
         echo "<script>window.location = 'index.php?p=viewaside';</script>";
     } else {
         echo "<script>alert('Error deleting aside. Please try again later.'); window.location = 'index.php?p=viewaside';</script>";
     }
 
-    $stmt->close();
-
-} catch (Exception $e) {
+} catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 } finally {
-    // Close the connection
-    $conn->close();
+    // Close the connection (PDO connection will be closed automatically when the script ends)
 }
 ?>

@@ -7,19 +7,20 @@ define("USER", "root");
 define("PWD", "root");
 define("DB", "ecom_db");
 
-// Establish MySQLi Connection
-$conn = new mysqli(HOST, USER, PWD, DB);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+try {
+    // Establish PDO Connection
+    $conn = new PDO("mysql:host=" . HOST . ";dbname=" . DB, USER, PWD);
+    // Set PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 
 // Handle form submission
 if (isset($_POST['submit'])) {
     // Sanitize and validate input
-    $title = mysqli_real_escape_string($conn, trim($_POST['title']));
-    $des = mysqli_real_escape_string($conn, trim($_POST['des']));
+    $title = htmlspecialchars(trim($_POST['title']));
+    $des = htmlspecialchars(trim($_POST['des']));
 
     // Ensure fields are not empty
     if (empty($title) || empty($des)) {
@@ -42,13 +43,17 @@ if (isset($_POST['submit'])) {
 
             // Move uploaded file to uploads folder
             if (move_uploaded_file($_FILES['pimg']['tmp_name'], $image_path)) {
-                // Insert data into the database using MySQLi
-                $sql = "INSERT INTO aside (title, des, image) VALUES ('$title', '$des', '$imageid')";
-                
-                if ($conn->query($sql) === TRUE) {
+                // Insert data into the database using PDO
+                $sql = "INSERT INTO aside (title, des, image) VALUES (:title, :des, :image)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':title', $title);
+                $stmt->bindParam(':des', $des);
+                $stmt->bindParam(':image', $imageid);
+
+                if ($stmt->execute()) {
                     echo "<div class='alert alert-success text-center'>Product added successfully!</div>";
                 } else {
-                    echo "<div class='alert alert-danger text-center'>Error: " . $conn->error . "</div>";
+                    echo "<div class='alert alert-danger text-center'>Error: Unable to add product</div>";
                 }
             } else {
                 echo "<div class='alert alert-danger text-center'>Image upload failed!</div>";
@@ -61,9 +66,14 @@ if (isset($_POST['submit'])) {
 
 // Fetch Data from Database
 $sql = "SELECT * FROM aside";
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<?php
+ include 'head.php';
+ include 'navbar.php';
+?>
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
@@ -112,8 +122,8 @@ $result = $conn->query($sql);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if ($result->num_rows > 0) : ?>
-                        <?php while ($row = $result->fetch_assoc()) : ?>
+                    <?php if ($result) : ?>
+                        <?php foreach ($result as $row) : ?>
                             <tr>
                                 <td><?= htmlspecialchars($row['id']) ?></td>
                                 <td><?= htmlspecialchars($row['title']) ?></td>
@@ -129,7 +139,7 @@ $result = $conn->query($sql);
                                     <a href="./aside/deleteaside.php?id=<?= $row['id'] ?>" class="badge bg-danger">Delete</a>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     <?php else : ?>
                         <tr>
                             <td colspan="5" class="text-center">No records found</td>
@@ -165,6 +175,6 @@ $result = $conn->query($sql);
 </html>
 
 <?php
-// Close MySQLi connection
-$conn->close();
+// Close PDO connection
+$conn = null;
 ?>

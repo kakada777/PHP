@@ -60,7 +60,10 @@ function calculateTotal() {
 </head>
 
 <body>
-<?php include 'navbar.php'; ?>
+<?php 
+include 'navbar.php'; 
+// include 'aside.php';
+?>
 
 <div class="container mt-5">
     <h2 class="text-center">Trendy Products</h2>
