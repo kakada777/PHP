@@ -19,7 +19,7 @@ try {
     // Get the ID safely
     $id = (int)$_GET['id'];
 
-    // Fetch the aside image filename before deletion
+    // Fetch the aside image filename before deletionqw
     $stmt = $conn->prepare("SELECT image FROM aside WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
@@ -37,7 +37,7 @@ try {
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        echo "<script>window.location = 'index.php?p=viewaside';</script>";
+        echo "<script>window.location = 'viewaside.php?p=viewaside';</script>";
     } else {
         echo "<script>alert('Error deleting aside. Please try again later.'); window.location = 'index.php?p=viewaside';</script>";
     }
