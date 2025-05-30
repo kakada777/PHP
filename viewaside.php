@@ -63,12 +63,10 @@ $num = $result->num_rows;
 <body>
 <div class="dashboard-container">
     <aside class="sidebar">
-        <h2>Admin Panel</h2>
+        <h2>Admin</h2>
         <ul>
             <li><a href="dashbord.php">Dashboard</a></li>
             <li><a href="viewaside.php">Slide</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
         </ul>
     </aside>
     <div class='body-area'>

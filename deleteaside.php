@@ -1,8 +1,8 @@
 <?php
 define("HOST", "127.0.0.1");
-define("USER", "root");
-define("PWD", "root");
-define("DB", "ecom_db");
+define("USER", "your_user");
+define("PWD", "your_password");
+define("DB", "your_db_name");
 
 try {
     // Establish PDO connection

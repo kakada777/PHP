@@ -1,10 +1,10 @@
 <?php
-// Include database connection
+
 require_once 'database/db.php'; // Ensure this file initializes $pdo properly
 
 try {
     // Establish PDO connection
-    $pdo = new PDO("mysql:host=127.0.0.1;dbname=ecom_db", "root", "root", [
+    $pdo = new PDO("mysql:host=127.0.0.1;dbname=your_db_name", "your_user", "your_password", [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);

@@ -66,7 +66,7 @@ include 'navbar.php';
 ?>
 
 <div class="container mt-5">
-    <h2 class="text-center">Trendy Products</h2>
+    <h2 class="text-center">Products Shoes</h2>
     <div class="row">
         <?php while ($row = $result->fetch_assoc()) { ?>
             <div class="col-md-4 mb-4">

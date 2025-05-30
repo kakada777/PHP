@@ -1,5 +1,11 @@
 <?php
 include 'database/db.php';
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 
 $sql = "SELECT * FROM products";
 $result = $conn->query($sql);
@@ -91,12 +97,10 @@ include 'navbar.php';
 ?>
     <div class="dashboard-container">
         <aside class="sidebar">
-            <h2>Admin Panel</h2>
+            <h2>Admin </h2>
             <ul>
                 <li><a href="dashbord.php">Dashboard</a></li>
                 <li><a href="viewaside.php">Slide</a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Analytics</a></li>
             </ul>
         </aside>
         

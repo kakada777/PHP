@@ -4,8 +4,8 @@ require_once 'database/db.php'; // Ensure this file initializes $conn properly
 
 try {
     // Establish PDO connection
-    $dsn = "mysql:host=127.0.0.1;dbname=ecom_db";
-    $conn = new PDO($dsn, "root", "root");
+    $dsn = "mysql:host=127.0.0.1;dbname=your_db_name";
+    $conn = new PDO($dsn, "your_user", "your_password");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Enable exception handling
 
     // Fetch the aside data based on the ID passed in the URL

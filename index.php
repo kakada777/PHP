@@ -6,7 +6,7 @@
 <?php include"navbar.php"?>
 
 <div class=" text-center  bg-body-tertiary ">
-<img class="img-1"  src="./picshoes/reportWebVitals.jpg" alt="" style="width:1450px">
+<img class="img-1"  src="./picshoes/reportWebVitals.jpg" alt="" style="width:1700px">
         <div class="col-md-6 p-lg-5 mx-auto my-5 small-home">
           <h1 class="display-3 fw-bold text-white">Designed for engineers</h1>
           <h3 class="home-h3 mb-3 text-white">Pellentesque dapibus hendrerit tortor. Cras non dolor. Fusce vel dui. Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Cras sagittis</h3>

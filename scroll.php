@@ -6,23 +6,23 @@
     <title>Document</title>
 </head>
 <style>
-.scroll-btn {
-    width: 45px;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
-}
-.show {
-    display: block;
-}
+    .scroll-btn {
+        width: 45px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    .show {
+        display: block;
+    }
 </style>
 <body>
     
